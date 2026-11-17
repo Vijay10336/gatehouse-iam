@@ -1,0 +1,24 @@
+log_format gatehouse '$remote_addr $request_method $uri $status $body_bytes_sent $request_time';
+resolver 127.0.0.11 valid=5s ipv6=off;
+upstream identity {
+    zone identity 64k;
+    server auth:8080 resolve;
+    keepalive 32;
+}
+server {
+    listen 8080;
+    access_log /var/log/nginx/access.log gatehouse;
+    client_max_body_size 64k;
+    location / {
+        proxy_pass http://identity;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Proto ${PUBLIC_SCHEME};
+        proxy_set_header X-Forwarded-Port ${PUBLIC_PORT};
+        proxy_read_timeout 30s;
+        add_header X-Gatehouse-Node $upstream_addr always;
+    }
+}

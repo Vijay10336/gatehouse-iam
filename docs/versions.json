@@ -1,0 +1,21 @@
+{
+  "checkedOn": "2026-11-18",
+  "java": "25 LTS",
+  "springBoot": "4.1.2",
+  "springSecurity": "7.1.2",
+  "postgresql": "18",
+  "frontend": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "lucide-react": "1.74.0",
+    "oidc-client-ts": "3.5.0"
+  },
+  "tooling": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.3.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.8",
+    "prettier": "3.10.1"
+  }
+}

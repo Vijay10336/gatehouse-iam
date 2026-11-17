@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "administratorCount": 1,
+  "checks": [
+    "signup creates a standard account",
+    "email verification required",
+    "chosen password required for verification",
+    "single-use verification link",
+    "verification resend endpoint",
+    "public admin fields cannot grant privileges",
+    "standard user cannot access admin API",
+    "standard user cannot promote itself",
+    "duplicate signup preserves the existing account",
+    "administrator-only directory filter"
+  ]
+}

@@ -1,0 +1,55 @@
+name: gatehouse
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: gatehouse
+      POSTGRES_USER: gatehouse
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?Run python3 scripts/setup.py first}
+    volumes:
+      - database:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U gatehouse -d gatehouse"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  mail:
+    image: axllent/mailpit:v1.27
+    ports:
+      - "127.0.0.1:18125:8025"
+  auth:
+    build: .
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/gatehouse
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      PUBLIC_ISSUER: ${PUBLIC_ISSUER:-http://localhost:18100}
+      KEY_ENCRYPTION_SECRET: ${KEY_ENCRYPTION_SECRET}
+      BOOTSTRAP_ADMIN_EMAIL: ${BOOTSTRAP_ADMIN_EMAIL:-admin@gatehouse.local}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD}
+      DEMO_CLIENT_SECRET: ${DEMO_CLIENT_SECRET}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      AUTH_REQUESTS_PER_MINUTE: ${AUTH_REQUESTS_PER_MINUTE:-300}
+      SMTP_HOST: ${SMTP_HOST:-mail}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_AUTH: ${SMTP_AUTH:-false}
+      SMTP_TLS: ${SMTP_TLS:-false}
+      MAIL_FROM: ${MAIL_FROM:-identity@gatehouse.local}
+    depends_on:
+      db:
+        condition: service_healthy
+  gateway:
+    image: nginx:stable-alpine
+    environment:
+      PUBLIC_PORT: ${PUBLIC_PORT:-18100}
+      PUBLIC_SCHEME: ${PUBLIC_SCHEME:-http}
+      NGINX_ENVSUBST_FILTER: "^(PUBLIC_PORT|PUBLIC_SCHEME)$$"
+    volumes:
+      - ./nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+    ports:
+      - "127.0.0.1:18100:8080"
+    depends_on:
+      - auth
+volumes:
+  database:

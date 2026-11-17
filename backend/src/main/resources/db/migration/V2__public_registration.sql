@@ -1,0 +1,7 @@
+ALTER TABLE iam_users ADD COLUMN email_verified BOOLEAN NOT NULL DEFAULT TRUE;
+CREATE TABLE iam_verification_tokens (
+    token_hash VARCHAR(64) PRIMARY KEY,
+    user_id UUID NOT NULL UNIQUE REFERENCES iam_users(id) ON DELETE CASCADE,
+    expires_at TIMESTAMPTZ NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

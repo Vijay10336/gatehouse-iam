@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "users": 50,
+  "parallelWorkers": 25,
+  "apiNodesObserved": 2,
+  "browserWorkload": "Each user signs in and makes three authenticated reads",
+  "browserWorkloadSeconds": 1.242,
+  "browserLatencyP50Ms": 582.8,
+  "browserLatencyP95Ms": 754.46,
+  "machineTokensIssuedAndValidated": 50,
+  "uniqueMachineTokens": 50,
+  "authorizationCodeRace": "one success, one rejection",
+  "refreshTokenRace": "one success, one rejection",
+  "lastAdministratorRace": "one update accepted, final administrator preserved",
+  "note": "Local Docker workload with 50 accounts, 25 parallel workers, and two API nodes."
+}

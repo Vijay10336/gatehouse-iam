@@ -1,0 +1,12 @@
+.env*
+!.env.example
+frontend/node_modules/
+frontend/dist/
+backend/target/
+work/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+*.pem
+*.p12

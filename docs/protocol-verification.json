@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "checks": [
+    "OIDC discovery",
+    "public JWKS",
+    "cross-node browser login",
+    "CSRF enforcement",
+    "administrator authorization",
+    "authorization code + PKCE",
+    "role claims",
+    "scope and role enforcement",
+    "invalid verifier rejection",
+    "redirect allowlist",
+    "client credentials",
+    "token introspection",
+    "session and grant revocation",
+    "role updates",
+    "SMTP password reset",
+    "single-use reset",
+    "last-administrator protection",
+    "optimistic version checks"
+  ]
+}
