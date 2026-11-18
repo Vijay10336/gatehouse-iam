@@ -1,3 +1,4 @@
+import { ActionButton } from "./ActionButton";
 import React, { useEffect, useRef, useState } from "react";
 import { Check, Copy, LoaderCircle, X } from "lucide-react";
 import { errorMessage } from "./api";
@@ -130,10 +131,10 @@ export function Form({
         </p>
       )}
       <div className="form-actions">
-        <button className="button" disabled={busy}>
+        <ActionButton className="button" disabled={busy}>
           {busy ? <LoaderCircle size={16} className="spin" /> : null}
           {busy ? "Saving…" : label}
-        </button>
+        </ActionButton>
       </div>
     </form>
   );

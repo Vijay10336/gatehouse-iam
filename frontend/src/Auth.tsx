@@ -66,11 +66,11 @@ export function Auth() {
       <aside className="auth-side">
         <Brand />
         <div>
-          <span className="eyebrow light">IDENTITY, WITH INTENTION</span>
+          <span className="eyebrow light">IDENTITY & ACCESS</span>
           <h1>
-            One place for
+            Manage access.
             <br />
-            every way in.
+            Across your apps.
           </h1>
           <p>
             Connect your applications.

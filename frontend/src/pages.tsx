@@ -1,3 +1,4 @@
+import { ActionButton } from "./ActionButton";
 import React from "react";
 import {
   Activity,
@@ -109,10 +110,10 @@ export function OverviewPage({
             </div>
           </div>
           <div className="connect-actions">
-            <a className="button" href="/demo">
+            <ActionButton className="button" href="/demo">
               Open demo application
               <ArrowUpRight size={16} />
-            </a>
+            </ActionButton>
             <button
               className="text-button"
               onClick={() => navigate("integrations")}
@@ -557,10 +558,10 @@ export function IntegrationPage({ data }: { data: Data }) {
             <h2>Connect a browser application</h2>
             <p>Register a public application, then use an OIDC client.</p>
           </div>
-          <a className="button small secondary" href="/demo">
+          <ActionButton className="button small secondary" href="/demo">
             Try the demo
             <ArrowUpRight size={15} />
-          </a>
+          </ActionButton>
         </div>
         <div className="install-command">
           <code>npm install oidc-client-ts</code>

@@ -1,3 +1,4 @@
+import { ActionButton } from "./ActionButton";
 import React, { useEffect, useState } from "react";
 import {
   UserManager,
@@ -134,7 +135,7 @@ export function Demo() {
                     </dd>
                   </div>
                 </dl>
-                <button
+                <ActionButton
                   className="button secondary"
                   onClick={() =>
                     manager
@@ -144,7 +145,7 @@ export function Demo() {
                 >
                   <LogOut size={16} />
                   Sign out through Gatehouse
-                </button>
+                </ActionButton>
               </>
             ) : (
               <>
@@ -153,7 +154,7 @@ export function Demo() {
                   <h3>Ready when you are.</h3>
                   <p>Use a user from your Gatehouse directory.</p>
                 </div>
-                <button
+                <ActionButton
                   className="button"
                   onClick={() =>
                     manager
@@ -164,7 +165,7 @@ export function Demo() {
                   <LogIn size={16} />
                   Sign in with Gatehouse
                   <ArrowRight size={15} />
-                </button>
+                </ActionButton>
               </>
             )}
           </section>
@@ -179,26 +180,26 @@ export function Demo() {
                 <strong>Read profile</strong>
                 <small>Requires the api.read scope</small>
               </div>
-              <button
+              <ActionButton
                 className="button small secondary"
                 disabled={!user || busy}
                 onClick={() => call("/api/resource/profile")}
               >
                 Call API
-              </button>
+              </ActionButton>
             </div>
             <div className="api-test">
               <div>
                 <strong>Editor access</strong>
                 <small>Requires api.write and the editor role</small>
               </div>
-              <button
+              <ActionButton
                 className="button small secondary"
                 disabled={!user || busy}
                 onClick={() => call("/api/resource/write")}
               >
                 Check access
-              </button>
+              </ActionButton>
             </div>
             {result !== null && (
               <div className="code-panel">

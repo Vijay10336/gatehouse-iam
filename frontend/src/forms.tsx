@@ -1,3 +1,4 @@
+import { ActionButton } from "./ActionButton";
 import React, { useState } from "react";
 import { KeyRound, Shield, SquareArrowOutUpRight } from "lucide-react";
 import { api } from "./api";
@@ -379,7 +380,7 @@ export function ClientDetails({
       )}
       <div className="detail-actions">
         {client.type !== "public" && (
-          <button
+          <ActionButton
             className="button secondary"
             onClick={() =>
               action(async () => {
@@ -401,7 +402,7 @@ export function ClientDetails({
           >
             <KeyRound size={15} />
             Rotate secret
-          </button>
+          </ActionButton>
         )}
         <button
           className={`button ${client.enabled ? "secondary danger" : ""}`}

@@ -75,3 +75,7 @@ This first version has one directory and global application roles. Application I
 Passwords and email addresses are administered locally. MFA, passkeys, social login, LDAP federation, multi-realm tenancy, automated signing-key rotation, and fine-grained resource policies are outside this version's feature set.
 
 Access tokens live for five minutes. External applications that validate signatures locally can accept a previously issued token until it expires. Use introspection when an integration needs immediate revocation checks. Gatehouse's sample API checks the stored grant on each request.
+
+## Interface design
+
+The app uses a custom Material UI theme, locally bundled Inter typography, clearer controls, and responsive layouts. See the [design notes and palette](docs/DESIGN.md).

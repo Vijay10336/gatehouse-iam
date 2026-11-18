@@ -1,3 +1,7 @@
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import { theme } from "./theme";
+import "@fontsource-variable/inter";
+import { ActionButton } from "./ActionButton";
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -47,6 +51,7 @@ import type {
   User,
 } from "./types";
 import "./style.css";
+import "./design.css";
 type Dialog =
   | { type: "new-user" }
   | { type: "user"; id: string }
@@ -336,7 +341,7 @@ function Console() {
             </div>
             {me.administrator &&
               (["users", "applications", "roles"].includes(page) ? (
-                <button
+                <ActionButton
                   className="button"
                   onClick={() =>
                     setModal({
@@ -355,15 +360,15 @@ function Console() {
                     : page === "applications"
                       ? "Register application"
                       : "Create role"}
-                </button>
+                </ActionButton>
               ) : page === "overview" ? (
-                <button
+                <ActionButton
                   className="button secondary"
                   onClick={() => setModal({ type: "new-user" })}
                 >
                   <Plus size={16} />
                   Create user
-                </button>
+                </ActionButton>
               ) : null)}
           </div>
           {error && (
@@ -632,9 +637,9 @@ function Console() {
               configuration.
             </p>
           </div>
-          <button className="button" onClick={() => setModal(null)}>
+          <ActionButton className="button" onClick={() => setModal(null)}>
             Done
-          </button>
+          </ActionButton>
         </Modal>
       )}
     </div>
@@ -649,5 +654,9 @@ function LayersIcon() {
   );
 }
 createRoot(document.getElementById("root")!).render(
-  location.pathname.startsWith("/demo") ? <Demo /> : <Console />,
+  <StyledEngineProvider injectFirst>
+    <ThemeProvider theme={theme}>
+      {location.pathname.startsWith("/demo") ? <Demo /> : <Console />}
+    </ThemeProvider>
+  </StyledEngineProvider>,
 );
